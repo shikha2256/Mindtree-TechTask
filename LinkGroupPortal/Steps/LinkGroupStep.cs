@@ -66,6 +66,5 @@ namespace LinkGroup.DemoTests.Steps
         {
             driver.Quit();
         }
-
     }
 }

@@ -19,6 +19,8 @@ namespace LinkGroup.DemoTests.Pages
         public IWebElement SearchBtn => WebDriver.FindElement(By.XPath("//button[contains(text(),'Search')]"));
         public IWebElement LeedsLbl => WebDriver.FindElement(By.XPath("//h3/em[contains(text(),'Leeds')]"));
 
+
+
         public void ClickAcceptCookies() => AcceptCookiesBtn.Click();
 
         public void OpenURL()

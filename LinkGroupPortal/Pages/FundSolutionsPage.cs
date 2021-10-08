@@ -1,18 +1,15 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace LinkGroup.DemoTests.Pages
 {
     public class FundSolutionsPage
     {
         public IWebDriver WebDriver { get; }
-        HttpClient _httpClient;
         public FundSolutionsPage(IWebDriver webdriver)
         {
             WebDriver = webdriver;
@@ -22,7 +19,7 @@ namespace LinkGroup.DemoTests.Pages
         public IWebElement AcceptCookiesBtn => WebDriver.FindElement(By.Id("btnAccept"));
         public IWebElement FundsLnk => WebDriver.FindElement(By.Id("navbarDropdown"));
 
-        public IWebElement getDynamicEmement(String Jurisdiction)
+        public IWebElement getDynamicElement(String Jurisdiction)
         {
             return WebDriver.FindElement(By.XPath($"//a[@href='/investment-managers-for-{Jurisdiction}-investors/']"));
         }
@@ -39,18 +36,13 @@ namespace LinkGroup.DemoTests.Pages
             action.MoveToElement(FundsLnk).Build().Perform();
         }
 
-        public async Task<HttpStatusCode> TestHttpStatusCodeAsync(string urlLink)
+        public bool TestHttpStatusCodeAsync(string urlLink)
         {
-           /* var request = (HttpWebRequest)WebRequest.Create(urlLink);
+            // HttpWebRequest request = WebRequest.Create("https://www.google.com/") as HttpWebRequest;
+            HttpWebRequest request = WebRequest.Create(urlLink) as HttpWebRequest;
             request.Method = "HEAD";
-            var response = (HttpWebResponse)request.GetResponse();
-
-            // status code...
-            return response.StatusCode;*/
-
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://www.google.com/");
-            return response.StatusCode;
+            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+            return (response.StatusCode==HttpStatusCode.OK);
         }
     }
 }
